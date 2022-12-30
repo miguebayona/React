@@ -1,12 +1,15 @@
-import { Cart } from "../icons/Cart";
+import { CartIcon } from "../icons/CartIcon";
+import { useCartContext } from "../../context/CartContext";
+import React from 'react'
 import './cartWidget.css'
 
 const CartWidget = () => {
-    letCartItemNumber = 0
+    const {totalProducts} = useCartContext();
+
     return (
         <div className="cart-widget">
-            <span className="cart-span">2</span>
-            <Cart/>
+            <span className="cart-span">{totalProducts() || 0}</span>
+            <CartIcon/>
         </div>
     );
 }

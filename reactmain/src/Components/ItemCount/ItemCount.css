@@ -10,6 +10,7 @@
     border: 1px solid black;
     width: 32px;
     font-size: 16px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 .countNum {
@@ -25,4 +26,5 @@
     width: 150px;
     margin-left: 3.5rem;
     padding: 8px;
+    border-radius: 5px 5px 5px 5px;
 }

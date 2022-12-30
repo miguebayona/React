@@ -19,10 +19,10 @@ function ItemCount(props) {
                 className="counter-btn"
                 onClick={() => (count > 1 ? setCount(count - 1) : setCount(count))}
         >
-                -
+            -
             </button>
         </div>
-            <button     className="agregar-carrito">Agregar al Carrito</button>
+            <button     className="agregar-carrito"onClick={()=> onAdd(count)}>Agregar al Carrito</button>
             </div>
         );
     }

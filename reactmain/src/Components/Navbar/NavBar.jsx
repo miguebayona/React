@@ -1,34 +1,26 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import CartWidget from '../CartWidget/CartWidget';
-import './NavBar.css'
 
-function NavBar() {
+import { Link } from 'react-router-dom';
+import './NavBar.css'
+import CartWidget from '../CartWidget/CartWidget'
+
+function NavBar({menus, categorias}) {
+
   return (
-    <>
-    <Navbar collapseOnSelect expand="lg" bg="info" variant="dark">
-      <Container>
-        <Navbar.Brand href="#home">Product Store</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#features" className='nav-text-color'>Sobre</Nav.Link>
-            <NavDropdown title="Productos" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Consola</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Camisas
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Tenis</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#pricing" className='nav-text-color'>Contacto</Nav.Link>
-          </Nav>
-          <CartWidget/>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    </>
+      <div className='navbar'>
+         <a href="/"><h1 className='nav__logo'>Store</h1></a>
+        {
+          menus.map((menu)=> {
+            return <Link className='navbar__menu' to={menu.href}>{menu.name}</Link>
+          })
+        }
+        {
+          categorias.map((categoria)=>{
+            return <Link className='navbar__menu' to={`/category/${categoria.id}`}>{categoria.name}</Link>
+          })
+        }
+
+        <Link to={"/cart"}><CartWidget/></Link>
+      </div>
   );
 }
 

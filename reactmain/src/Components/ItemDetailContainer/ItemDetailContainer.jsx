@@ -1,17 +1,29 @@
-import ItemCount from "../ItemCount/ItemCount";
-const ItemDetail = ({producto}) => {
+import { getDoc, doc} from 'firebase/firestore'
+import { db } from '../../services/firebase/firebaseconfig';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import ItemDetail from "../ItemDetail/ItemDetail"
+import './ItemDetailContainer.css';
+
+const ItemDetailContainer = () => {
+    const [item, setItem] = useState({});
+    const {detalleId} = useParams();
+
+
+    useEffect(()=>{
+        const itemRef = doc(db, "item", detalleId);
+
+        getDoc(itemRef).then((result) =>{
+            setItem({id:result.id, ...result.data()});
+        })
+
+    }, [])
+
     return (
-        <div>
-            <div>
-                <img src={producto.img} width={100} height={100} alt='imagen de productos'/>
-                <h3>{producto.name}</h3>
-                <p>{producto.detalle}</p>
-                <p>${producto.precio}</p>
-                <p>Stock: {producto.stock}</p>
-                <ItemCount stock={producto.stock}/>
-            </div>
+        <div className="itemDetail__container">
+            <ItemDetail producto={item}/>
         </div>
     )
 }
 
-export default ItemDetail;
+export default ItemDetailContainer;
